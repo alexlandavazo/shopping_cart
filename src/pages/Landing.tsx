@@ -17,7 +17,7 @@ const Landing = ({ articles, getAllProductsFromApi, cart}: Props): JSX.Element =
     getAllProductsFromApi()
   }, [])
   return (
-    <div>
+    <div className="font-sans">
       <Header cart={cart} />
       <div className="container mx-auto flex items-center justify-around flex-wrap pt-4 pb-12">
         {articles.map(product => (

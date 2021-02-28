@@ -3,7 +3,7 @@ import { Article } from '../types/Article'
 import { ThunkDispatch } from 'redux-thunk'
 import { AppActions } from '../types/actions'
 import { bindActionCreators } from 'redux'
-import { addProductToCart, addToCart, removeProductFromCart } from '../actions/cart'
+import { addToCart, removeProductFromCart } from '../actions/cart'
 import { connect } from 'react-redux'
 
 interface ProductLinkProps {
@@ -36,7 +36,7 @@ const ProductLink: React.FC<Props> = ({ product, addToCart, removeProductFromCar
   }
 
   return (
-    <div className="md:w-1/3 xl:w-1/4 lg:w-1/3 flex flex-col">
+    <div className="md:w-1/3 xl:w-1/4 lg:w-1/3 flex flex-col font-sans">
       <span>
         <img
           className="hover:grow hover:shadow-lg"
@@ -44,12 +44,12 @@ const ProductLink: React.FC<Props> = ({ product, addToCart, removeProductFromCar
           alt=""
         />
         <div className="pt-3 flex items-center justify-between">
-          <p className="">{product.prodName}</p>
+          <p className="font-sans">{product.prodName}</p>
           <div className="flex border border-black rounded-md">
             <button className="flex items-center px-2 py-1" onClick={(): void => min()}>
               -
             </button>
-            <span className="py-1 px-4 mx-auto">{quantity}</span>
+            <span className="py-1 px-4 mx-auto font-sans">{quantity}</span>
             <button className="flex items-center py-1 px-2" onClick={(): void => add()}>
               +
             </button>

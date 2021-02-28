@@ -1,15 +1,6 @@
-const path = require('path')
-const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const PurgecssPlugin = require('purgecss-webpack-plugin')
 
-const paths = {
-  src: path.join(__dirname, 'src')
-}
 
 module.exports = {
   output: {
@@ -34,7 +25,6 @@ module.exports = {
 
   plugins: [new CleanWebpackPlugin()],
   optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin(), new UglifyJsPlugin()],
     splitChunks: {
       chunks: 'async',
       minChunks: 1,
