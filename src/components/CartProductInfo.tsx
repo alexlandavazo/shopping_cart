@@ -22,10 +22,6 @@ const CardProductInfo = ({ product }: Props): JSX.Element => {
           <span className="text-blue-500 text-xs">{product.publications}</span>
         </div>
       )}
-
-      <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">
-        Remove
-      </a>
     </div>
   )
 }

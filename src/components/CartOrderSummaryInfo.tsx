@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from "react";
 import { User } from '../types/User'
 import { ThunkDispatch } from 'redux-thunk'
 import { AppActions } from '../types/actions'
@@ -9,6 +9,7 @@ import { CreditCard } from '../types/CreditCard'
 import { Cart } from '../types/Cart'
 import { Order } from '../types/Order'
 import { createOrder } from '../actions/order'
+import { Modal } from './Modal'
 
 interface CartUserInfoProps {
   cart: Cart
@@ -20,6 +21,8 @@ interface CartUserInfoProps {
 type Props = LinkDispatch & CartUserInfoProps
 
 const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: Props): JSX.Element => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   const handleClick = (): void => {
     const order: Order = {
       address: address,
@@ -29,9 +32,11 @@ const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: 
       creditCard: creditCard
     }
     createOrder(order)
+    setShowModal(true);
   }
 
   return (
+    <>
     <div className="mt-4">
       <div className="flex justify-between mt-10 mb-5">
         <span className="font-semibold text-sm uppercase">User:</span>
@@ -67,6 +72,34 @@ const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: 
         </button>
       </div>
     </div>
+      { showModal?
+      <Modal>
+        <div className="flex justify-between mt-10 mb-5">
+          <span className="font-semibold text-sm uppercase">User:</span>
+          <span className="font-semibold text-sm">{user.userName}</span>
+        </div>
+        <div className="flex justify-between mt-10 mb-5">
+          <span className="font-semibold text-sm uppercase">Address:</span>
+          <span className="font-semibold text-sm">{address.fullAddress}</span>
+        </div>
+        <div className="flex justify-between mt-10 mb-5">
+          <span className="font-semibold text-sm uppercase">City:</span>
+          <span className="font-semibold text-sm">
+          {address.city}, {address.state}
+        </span>
+        </div>
+        <div className="flex justify-between mt-10 mb-5">
+          <span className="font-semibold text-sm uppercase">Products:</span>
+            {cart.products.map(product => (
+              <span className="font-semibold text-sm">{product.quantity} x {product.prodName}</span>
+            ))}
+        </div>
+        <div className="flex justify-between mt-10 mb-5">
+          <span className="font-semibold text-sm uppercase">TOTAL:</span>
+          <span className="font-semibold text-sm">${cart.total}</span>
+        </div>
+      </Modal>: null}
+    </>
   )
 }
 
