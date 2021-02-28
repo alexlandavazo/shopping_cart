@@ -2,11 +2,12 @@ import {
   ADD_PRODUCT_CART,
   ADD_TOTAL_CART,
   CartActionType,
+  DELETE_CART,
   REMOVE_PRODUCT_CART,
   UPDATE_PRODUCT_CART
-} from '../types/actions'
-import { Article } from '../types/Article'
-import { store } from '../store/configureStore'
+} from "../types/actions";
+import { Article } from "../types/Article";
+import { store } from "../store/configureStore";
 
 export const addProductToCart = (product: Article): CartActionType => ({
   type: ADD_PRODUCT_CART,
@@ -25,6 +26,10 @@ export const updateProductFromCart = (product: Article): CartActionType => ({
 export const addTotalToCart = (total: number): CartActionType => ({
   type: ADD_TOTAL_CART,
   total
+})
+
+export const deleteCart = ():CartActionType => ({
+  type: DELETE_CART
 })
 
 export const addToCart = (product: Article) => {

@@ -26,6 +26,7 @@ export const ADD_PRODUCT_CART = 'ADD_PRODUCT_CART'
 export const REMOVE_PRODUCT_CART = 'REMOVE_PRODUCT_CART'
 export const UPDATE_PRODUCT_CART = 'UPDATE_PRODUCT_CART'
 export const ADD_TOTAL_CART = 'ADD_TOTAL_CART'
+export const DELETE_CART = 'DELETE_CART'
 
 export interface AddProductCartAction {
   type: typeof ADD_PRODUCT_CART
@@ -42,6 +43,10 @@ export interface UpdateProductCartAction {
   product: Article
 }
 
+export interface DeleteCartAction {
+  type: typeof DELETE_CART
+}
+
 export interface AddTotalCartAction {
   type: typeof ADD_TOTAL_CART
   total: number
@@ -52,6 +57,7 @@ export type CartActionType =
   | RemoveProductCartAction
   | UpdateProductCartAction
   | AddTotalCartAction
+  | DeleteCartAction
 
 export const ADD_ADDRESS = 'ADD_ADDRESS'
 

@@ -10,6 +10,8 @@ import { Cart } from '../types/Cart'
 import { Order } from '../types/Order'
 import { createOrder } from '../actions/order'
 import { Modal } from './Modal'
+import { deleteCart } from '../actions/cart';
+import { Link } from 'react-router-dom'
 
 interface CartUserInfoProps {
   cart: Cart
@@ -20,7 +22,7 @@ interface CartUserInfoProps {
 
 type Props = LinkDispatch & CartUserInfoProps
 
-const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: Props): JSX.Element => {
+const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder, deleteCart }: Props): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClick = (): void => {
@@ -33,6 +35,9 @@ const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: 
     }
     createOrder(order)
     setShowModal(true);
+  }
+  const resetCart = (): void => {
+    deleteCart()
   }
 
   return (
@@ -98,6 +103,13 @@ const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: 
           <span className="font-semibold text-sm uppercase">TOTAL:</span>
           <span className="font-semibold text-sm">${cart.total}</span>
         </div>
+        <Link onClick={() =>resetCart()} to="/">
+          <span
+            className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+          >
+            Finalize the payment
+          </span>
+        </Link>
       </Modal>: null}
     </>
   )
@@ -105,10 +117,12 @@ const CartOrderSummaryInfo = ({ user, cart, creditCard, address, createOrder }: 
 
 interface LinkDispatch {
   createOrder: (order: Order) => void
+  deleteCart: () =>void
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>): LinkDispatch => ({
-  createOrder: bindActionCreators(createOrder, dispatch)
+  createOrder: bindActionCreators(createOrder, dispatch),
+  deleteCart: bindActionCreators(deleteCart, dispatch)
 })
 
 export default connect(null, mapDispatchToProps)(CartOrderSummaryInfo)

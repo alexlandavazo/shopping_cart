@@ -12,7 +12,7 @@ import { Cart } from '../types/Cart'
 
 type Props = LinkStateProps & LinkDispatchProps
 
-const Landing = ({ articles, getAllProductsFromApi, cart }: Props): JSX.Element => {
+const Landing = ({ articles, getAllProductsFromApi, cart}: Props): JSX.Element => {
   useEffect(() => {
     getAllProductsFromApi()
   }, [])
@@ -42,8 +42,8 @@ interface LinkStateProps {
 }
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
-  cart: state.cart,
-  articles: state.articles
+  articles: state.articles,
+  cart: state.cart
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing)

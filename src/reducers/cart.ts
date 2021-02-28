@@ -2,18 +2,19 @@ import {
   ADD_PRODUCT_CART,
   ADD_TOTAL_CART,
   CartActionType,
+  DELETE_CART,
   REMOVE_PRODUCT_CART,
   UPDATE_PRODUCT_CART
-} from '../types/actions'
-import { Cart } from '../types/Cart'
+} from "../types/actions";
+import { Cart } from "../types/Cart";
 
-const initialStateUser: Cart = {
+const initialStateCart: Cart = {
   products: [],
   total: 0,
   status: 'in_progress'
 }
 
-const cartReducerDefaultState: Cart = initialStateUser
+const cartReducerDefaultState: Cart = initialStateCart
 
 const cartReducer = (state = cartReducerDefaultState, action: CartActionType): Cart => {
   switch (action.type) {
@@ -33,6 +34,8 @@ const cartReducer = (state = cartReducerDefaultState, action: CartActionType): C
     }
     case ADD_TOTAL_CART:
       return { ...state, total: action.total }
+    case DELETE_CART:
+      return initialStateCart
     default:
       return state
   }
